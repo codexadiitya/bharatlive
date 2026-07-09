@@ -4,6 +4,9 @@ import { newsQueryOptions } from "@/lib/news-query";
 import { ArrowLeft, MapPin, Bookmark, Share2 } from "lucide-react";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { usePreferences } from "@/hooks/usePreferences";
+import { useLang } from "@/hooks/useLang";
+import { useQuery } from "@tanstack/react-query";
+import { generateFullArticle } from "@/lib/article.functions";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import NewsCard from "@/components/NewsCard";
@@ -56,7 +59,22 @@ function ArticlePage() {
   const { item, related } = Route.useLoaderData();
   const { has, toggle } = useBookmarks();
   const { log } = usePreferences();
+  const { lang } = useLang();
   const saved = has(item.id);
+
+  const articleQuery = useQuery({
+    queryKey: ["article-body", item.id, lang],
+    queryFn: () => generateFullArticle({
+      data: {
+        title: item.title,
+        summary: item.summary,
+        source: item.source,
+        city: item.city,
+        state: item.state,
+        lang
+      }
+    })
+  });
 
   useEffect(() => {
     log(item, "view");
@@ -83,7 +101,7 @@ function ArticlePage() {
         <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
-            Back to feed
+            {lang === "hi" ? "फ़ीड पर वापस" : "Back to feed"}
           </Link>
           <div className="flex items-center gap-2">
             <button
@@ -96,14 +114,14 @@ function ArticlePage() {
               }`}
             >
               <Bookmark className="h-3.5 w-3.5" fill={saved ? "currentColor" : "none"} />
-              {saved ? "Saved" : "Save"}
+              {saved ? (lang === "hi" ? "सहेजा गया" : "Saved") : (lang === "hi" ? "सहेजें" : "Save")}
             </button>
             <button
               onClick={onShare}
               className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs transition hover:border-saffron/50"
             >
               <Share2 className="h-3.5 w-3.5" />
-              Share
+              {lang === "hi" ? "साझा करें" : "Share"}
             </button>
           </div>
         </div>
@@ -146,23 +164,28 @@ function ArticlePage() {
         <p className="mt-6 text-xl leading-relaxed text-muted-foreground">{item.summary}</p>
 
         <div className="mt-10 space-y-5 text-base leading-relaxed text-foreground/90">
-          <p>
-            {item.summary} This developing story from {item.city} is drawing attention across {item.state} and beyond,
-            with local reporters on the ground and community leaders weighing in throughout the day.
-          </p>
-          <p>
-            Sources familiar with the matter tell {item.source} that further updates are expected in the coming hours.
-            BharatLive will continue to track the story as it evolves and add fresh context as new details emerge.
-          </p>
-          <p>
-            For more from {item.state}, browse the state feed below or return to the live all-India feed to see what
-            else is happening right now.
-          </p>
+          {articleQuery.isLoading ? (
+            <div className="space-y-4 animate-pulse">
+              <div className="h-4 bg-muted rounded w-full"></div>
+              <div className="h-4 bg-muted rounded w-5/6"></div>
+              <div className="h-4 bg-muted rounded w-4/5"></div>
+              <div className="pt-4 space-y-4">
+                <div className="h-4 bg-muted rounded w-full"></div>
+                <div className="h-4 bg-muted rounded w-11/12"></div>
+              </div>
+            </div>
+          ) : articleQuery.data ? (
+            articleQuery.data.map((p, idx) => <p key={idx}>{p}</p>)
+          ) : (
+            <p>{lang === "hi" ? "आलेख लोड करने में विफल।" : "Failed to load article."}</p>
+          )}
         </div>
 
         {related.length > 0 && (
           <div className="mt-16 border-t border-border/60 pt-10">
-            <h2 className="font-display text-xl font-bold">More from {item.state}</h2>
+            <h2 className="font-display text-xl font-bold">
+              {lang === "hi" ? `${item.state} से और अधिक` : `More from ${item.state}`}
+            </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {related.map((n: NewsItem) => (
                 <NewsCard key={n.id} item={n} />

@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "bharat-live-mcp",
+      "version": "0.1.0",
+      "title": "Bharat Live News"
+    },
+    "tools": [
+      {
+        "name": "list_states",
+        "title": "List Indian states",
+        "description": "List all Indian states and union territories covered by the news app, with their capital cities and ISO codes.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_latest_news",
+        "title": "Get latest India news",
+        "description": "Fetch the latest India news headlines from the app's live feed. Returns up to 40 recent items across states and categories (Politics, Business, Tech, Sports, Culture).",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "lang": {
+              "type": "string",
+              "enum": [
+                "en",
+                "hi"
+              ],
+              "default": "en",
+              "description": "Language of the returned items: 'en' (English) or 'hi' (Hindi)."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 40,
+              "default": 15,
+              "description": "Maximum number of items to return (1-40)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_state_news",
+        "title": "Get news for an Indian state",
+        "description": "Fetch recent news filtered to a specific Indian state or union territory (e.g. 'Maharashtra', 'Kerala'). Use `list_states` to see valid names.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The state name exactly as returned by `list_states` (e.g. 'Karnataka')."
+            },
+            "lang": {
+              "type": "string",
+              "enum": [
+                "en",
+                "hi"
+              ],
+              "default": "en",
+              "description": "Language of the returned items: 'en' (English) or 'hi' (Hindi)."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20,
+              "default": 10,
+              "description": "Maximum number of items to return (1-20)."
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_feedback",
+        "title": "Submit feedback",
+        "description": "Send feedback about the news app on behalf of the caller. Message is required; name and email are optional.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000,
+              "description": "Feedback message (1-2000 characters)."
+            },
+            "name": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "Optional name of the person sending feedback."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 255,
+              "description": "Optional email for follow-up."
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

@@ -90,7 +90,7 @@ function AuthPage() {
           return;
         }
         setEmailLoading(true);
-        const { error } = await client.auth.signUp({
+        const { data, error } = await client.auth.signUp({
           email: parsed.data.email,
           password: parsed.data.password,
           options: {
@@ -104,7 +104,12 @@ function AuthPage() {
           toast.error(typeof msg === "string" ? msg : JSON.stringify(error));
           return;
         }
-        toast.success("Account created! Check your inbox to confirm your email.");
+        
+        if (data.session) {
+          toast.success("Account created! Welcome to BharatLive.");
+        } else {
+          toast.success("Account created! Check your inbox to confirm your email.");
+        }
       } else {
         const parsed = signInSchema.safeParse({ email, password });
         if (!parsed.success) {

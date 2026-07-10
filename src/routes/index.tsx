@@ -438,34 +438,7 @@ function Home() {
             />
           </div>
 
-          <div className="mt-8 rounded-xl border border-border/60 bg-card/50 p-5">
-            <h3 className="text-sm font-semibold text-foreground">Contact the Admin</h3>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Found a bug, have a story tip, or just want to say hi? Ping me on Discord — I read every message.
-            </p>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <a
-                href="discord://-/users/854936390303612949"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground transition hover:bg-primary/90"
-              >
-                <MessageSquare className="h-4 w-4" />
-                Open in Discord
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  navigator.clipboard?.writeText("854936390303612949");
-                }}
-                className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-background/60 px-3 py-2.5 text-xs font-medium text-foreground transition hover:bg-background"
-                title="Copy my Discord user ID"
-              >
-                Copy ID: 854936390303612949
-              </button>
-            </div>
-            <p className="mt-2 text-[11px] text-muted-foreground">
-              In Discord, paste the ID in the search bar (or use "Add Friend") to reach me directly.
-            </p>
-          </div>
+
         </div>
         <div className="border-t border-border/40">
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 py-6 text-sm text-muted-foreground md:flex-row md:items-center">

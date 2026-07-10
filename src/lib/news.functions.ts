@@ -271,9 +271,9 @@ export const fetchNews = createServerFn({ method: "GET" })
       const items: NewsItem[] = [];
       const seen = new Set<string>();
 
-      // 1) Prefer NewsData when configured for stronger India coverage.
-      if (apiKey) {
-        const MAX_PAGES = 5;
+      const fetchNewsDataTask = async () => {
+        if (!apiKey) return [];
+        const MAX_PAGES = 3;
         const collected: NewsDataArticle[] = [];
         let nextPage: string | undefined;
 
@@ -292,10 +292,7 @@ export const fetchNews = createServerFn({ method: "GET" })
             console.error("NewsData fetch error", err);
             return null;
           });
-          if (!res || !res.ok) {
-            if (res) console.error("NewsData fetch failed", res.status, await res.text().catch(() => ""));
-            break;
-          }
+          if (!res || !res.ok) break;
           const json = (await res.json().catch(() => null)) as {
             status: string;
             results?: NewsDataArticle[];
@@ -306,36 +303,44 @@ export const fetchNews = createServerFn({ method: "GET" })
           if (!json.nextPage) break;
           nextPage = json.nextPage;
         }
+        return collected;
+      };
 
-        for (const a of collected) {
-          if (!a.title) continue;
-          if (seen.has(a.article_id)) continue;
-          // Try to tag to a state, but DON'T drop untagged items â€” bucket as National so
-          // major India stories still show even when no city/state is named in the text.
-          const tagged = tagStateAndCity(`${a.title} ${a.description ?? ""}`) ?? {
-            state: "National",
-            city: "India",
-          };
-          seen.add(a.article_id);
-          items.push({
-            id: a.article_id,
-            title: a.title,
-            summary: a.description?.slice(0, 240) ?? a.title,
-            state: tagged.state,
-            city: tagged.city,
-            category: mapCategory(a.category),
-            source: a.source_name || a.source_id || "News",
-            publishedAt: new Date(a.pubDate.replace(" ", "T") + "Z").toISOString(),
-            image: sanitizeImageUrl(a.image_url),
-          });
-        }
+      const fetchGdeltTask = async () => {
+        const gdeltQuery = data.lang === "hi"
+          ? '(india OR bharat) AND sourcecountry:IN AND sourcelang:Hindi'
+          : '(india OR bharat) AND sourcecountry:IN';
+        return fetchGdelt(gdeltQuery, 75);
+      };
+
+      const [newsDataResult, gdeltResult] = await Promise.allSettled([
+        fetchNewsDataTask(),
+        fetchGdeltTask()
+      ]);
+
+      const collected = newsDataResult.status === "fulfilled" ? newsDataResult.value : [];
+      const gdeltArticles = gdeltResult.status === "fulfilled" ? gdeltResult.value : [];
+
+      for (const a of collected) {
+        if (!a.title) continue;
+        if (seen.has(a.article_id)) continue;
+        const tagged = tagStateAndCity(`${a.title} ${a.description ?? ""}`) ?? {
+          state: "National",
+          city: "India",
+        };
+        seen.add(a.article_id);
+        items.push({
+          id: a.article_id,
+          title: a.title,
+          summary: a.description?.slice(0, 240) ?? a.title,
+          state: tagged.state,
+          city: tagged.city,
+          category: mapCategory(a.category),
+          source: a.source_name || a.source_id || "News",
+          publishedAt: new Date(a.pubDate.replace(" ", "T") + "Z").toISOString(),
+          image: sanitizeImageUrl(a.image_url),
+        });
       }
-
-      // 2) Always augment with GDELT latest India coverage for fresher stories and more genuine images.
-      const gdeltQuery = data.lang === "hi"
-        ? '(india OR bharat) AND sourcecountry:IN AND sourcelang:Hindi'
-        : '(india OR bharat) AND sourcecountry:IN';
-      const gdeltArticles = await fetchGdelt(gdeltQuery, 75);
 
       for (const a of gdeltArticles) {
         if (!a.title || !a.url) continue;

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { MOCK_NEWS, timeAgo, newsImage, fallbackImage, type NewsItem } from "@/lib/mock-news";
+import { MOCK_NEWS, timeAgo, newsImage, type NewsItem } from "@/lib/mock-news";
 import { newsQueryOptions } from "@/lib/news-query";
 import { ArrowLeft, MapPin, Bookmark, Share2 } from "lucide-react";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -33,9 +33,11 @@ export const Route = createFileRoute("/article/$id")({
         { property: "og:title", content: item.title },
         { property: "og:description", content: item.summary },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: newsImage(item) },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: newsImage(item) },
+        ...(newsImage(item) ? [
+          { property: "og:image", content: newsImage(item)! },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "twitter:image", content: newsImage(item)! },
+        ] : []),
       ],
     };
   },
@@ -148,18 +150,18 @@ function ArticlePage() {
           {item.title}
         </h1>
 
-        <div className="mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-border bg-muted">
-          <img
-            src={newsImage(item)}
-            alt={item.title}
-            className="h-full w-full object-cover"
-            onError={(e) => {
-              const img = e.currentTarget;
-              const fb = fallbackImage(item.id);
-              if (img.src !== fb) img.src = fb;
-            }}
-          />
-        </div>
+        {newsImage(item) && (
+          <div className="mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+            <img
+              src={newsImage(item)!}
+              alt={item.title}
+              className="h-full w-full object-cover"
+              onError={(e) => {
+                e.currentTarget.parentElement!.style.display = "none";
+              }}
+            />
+          </div>
+        )}
 
         <p className="mt-6 text-xl leading-relaxed text-muted-foreground">{item.summary}</p>
 

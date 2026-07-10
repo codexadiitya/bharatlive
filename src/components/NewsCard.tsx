@@ -1,4 +1,4 @@
-import { type NewsItem, timeAgo, newsImage, fallbackImage } from "@/lib/mock-news";
+import { type NewsItem, timeAgo, newsImage } from "@/lib/mock-news";
 import { Link } from "@tanstack/react-router";
 import { MapPin, Bookmark, Share2, ShieldCheck, Loader2, AlertTriangle, CheckCircle2, HelpCircle, X } from "lucide-react";
 import { useState } from "react";
@@ -76,30 +76,26 @@ export default function NewsCard({ item }: { item: NewsItem }) {
 
   return (
     <article className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-saffron/50 hover:bg-card/80">
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
-        <img
-          src={newsImage(item)}
-          alt={item.title}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          onError={(e) => {
-            const img = e.currentTarget;
-            const fb = fallbackImage(item.id);
-            if (img.src !== fb) img.src = fb;
-          }}
-          onLoad={(e) => {
-            const img = e.currentTarget;
-            // Some publishers return 1x1 tracker pixels or broken tiny images
-            // that decode to garbage/glitch on mobile browsers — swap to fallback.
-            if (img.naturalWidth < 100 || img.naturalHeight < 60) {
-              const fb = fallbackImage(item.id);
-              if (img.src !== fb) img.src = fb;
-            }
-          }}
-        />
-      </div>
+      {newsImage(item) && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+          <img
+            src={newsImage(item)!}
+            alt={item.title}
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              e.currentTarget.parentElement!.style.display = "none";
+            }}
+            onLoad={(e) => {
+              if (e.currentTarget.naturalWidth < 100 || e.currentTarget.naturalHeight < 60) {
+                e.currentTarget.parentElement!.style.display = "none";
+              }
+            }}
+          />
+        </div>
+      )}
       <div className="relative p-5">
 
       <div className="relative z-20 mb-3 flex items-center justify-between gap-2">

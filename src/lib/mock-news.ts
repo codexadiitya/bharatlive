@@ -31,17 +31,6 @@ function keywordsFor(item: Pick<NewsItem, "title" | "category" | "state" | "city
   return Array.from(new Set(tags)).join(",");
 }
 
-export function fallbackImage(seed: string, keywords = "india,news"): string {
-  const images = [
-    "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?q=80&w=800&auto=format&fit=crop",
-  ];
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) { h = Math.imul(31, h) + seed.charCodeAt(i) | 0; }
-  return images[Math.abs(h) % images.length];
-}
 
 // Hosts that never serve an image on a public https origin (tracking beacons,
 // ad networks, HTML redirectors). Extend as needed.
@@ -122,9 +111,8 @@ export function isLikelyValidImage(url: string | null | undefined): url is strin
   return sanitizeImageUrl(url) !== null;
 }
 
-export function newsImage(item: Pick<NewsItem, "id" | "image" | "title" | "category" | "state" | "city">): string {
-  const clean = sanitizeImageUrl(item.image);
-  return clean ?? fallbackImage(item.id, keywordsFor(item));
+export function newsImage(item: Pick<NewsItem, "id" | "image" | "title" | "category" | "state" | "city">): string | null {
+  return sanitizeImageUrl(item.image);
 }
 
 

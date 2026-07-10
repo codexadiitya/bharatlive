@@ -50,7 +50,7 @@ export default function FeedbackForm({ labels }: { labels: { title: string; subt
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur">
       <div>
         <h3 className="font-display text-xl font-semibold tracking-tight">{labels.title}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{labels.subtitle}</p>
@@ -63,6 +63,7 @@ export default function FeedbackForm({ labels }: { labels: { title: string; subt
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
             disabled={loading}
+            className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
           />
         </div>
         <div className="space-y-1.5">
@@ -73,6 +74,7 @@ export default function FeedbackForm({ labels }: { labels: { title: string; subt
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             disabled={loading}
+            className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
           />
           {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
         </div>
@@ -85,10 +87,11 @@ export default function FeedbackForm({ labels }: { labels: { title: string; subt
           placeholder="Tell us what needs to change or improve..."
           rows={4}
           disabled={loading}
+          className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
         />
         {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
       </div>
-      <Button type="submit" disabled={loading} className="bg-saffron hover:bg-saffron/90 text-primary-foreground">
+      <Button type="submit" disabled={loading} className="w-full rounded-xl bg-saffron hover:bg-saffron/90 text-primary-foreground">
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         {loading ? labels.sending : labels.send}
       </Button>

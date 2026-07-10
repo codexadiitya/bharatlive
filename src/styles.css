@@ -73,33 +73,33 @@
 }
 
 .dark {
-  --background: oklch(0.16 0.03 265);
+  --background: #0F1E3D;
   --foreground: oklch(0.98 0.005 90);
-  --card: oklch(0.20 0.035 265);
+  --card: #0B162C;
   --card-foreground: oklch(0.98 0.005 90);
-  --popover: oklch(0.20 0.035 265);
+  --popover: #0B162C;
   --popover-foreground: oklch(0.98 0.005 90);
-  --primary: oklch(0.78 0.16 60);
-  --primary-foreground: oklch(0.15 0.02 265);
-  --secondary: oklch(0.26 0.04 265);
+  --primary: #FF6B35;
+  --primary-foreground: #0B162C;
+  --secondary: #1A2C54;
   --secondary-foreground: oklch(0.98 0.005 90);
-  --muted: oklch(0.24 0.03 265);
+  --muted: #1A2C54;
   --muted-foreground: oklch(0.72 0.02 265);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.78 0.16 60);
-  --saffron: oklch(0.78 0.16 60);
-  --india-green: oklch(0.60 0.18 155);
+  --ring: #FF6B35;
+  --saffron: #FF6B35;
+  --india-green: #0F9D77;
   --chakra: oklch(0.55 0.20 260);
   /* Map dark tokens */
-  --map-fill-active: oklch(0.78 0.16 60);
+  --map-fill-active: #FF6B35;
   --map-fill-inactive-base: 0.30;
-  --map-stroke-active: oklch(0.88 0.14 60);
-  --map-stroke-inactive: oklch(0.55 0.03 265);
-  --map-label-active: oklch(0.15 0.02 265);
+  --map-stroke-active: #FF9B75;
+  --map-stroke-inactive: #1A2C54;
+  --map-label-active: #0B162C;
   --map-label-inactive: oklch(0.92 0.02 265);
-  --map-label-stroke-active: oklch(0.98 0.05 60);
-  --map-label-stroke-inactive: oklch(0.18 0.02 265);
+  --map-label-stroke-active: #FFFFFF;
+  --map-label-stroke-inactive: #0F1E3D;
 }
 
 @layer base {

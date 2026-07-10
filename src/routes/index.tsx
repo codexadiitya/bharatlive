@@ -77,7 +77,7 @@ function Home() {
     return forYou && hasSignal ? rank(base) : base;
   }, [news, selected, category, query, forYou, hasSignal, rank]);
 
-  const tickerItems = news.slice(0, 8);
+  const tickerItems = news.slice(0, 16);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -91,15 +91,15 @@ function Home() {
 
           {/* Primary nav */}
           <nav className="hidden items-center justify-center gap-8 text-sm font-medium text-foreground/80 lg:flex">
-            <Link to="/explore" className="transition-colors hover:text-saffron">{t.explore}</Link>
-            <Link to="/feed" className="transition-colors hover:text-saffron">{t.feed}</Link>
-            <Link to="/sports" className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+            <Link to="/explore" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="transition-colors hover:text-saffron">{t.explore}</Link>
+            <Link to="/feed" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="transition-colors hover:text-saffron">{t.feed}</Link>
+            <Link to="/sports" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
               <Trophy className="h-4 w-4" /> {t.sports}
             </Link>
-            <Link to="/world" className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+            <Link to="/world" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
               <Globe2 className="h-4 w-4" /> {t.world}
             </Link>
-            <Link to="/bot" className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+            <Link to="/bot" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
               <Bot className="h-4 w-4" /> Bot
             </Link>
             <a href="#about" className="text-muted-foreground transition-colors hover:text-foreground">{t.about}</a>
@@ -239,10 +239,10 @@ function Home() {
                 {t.resetView}
               </button>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border/60 pt-6">
+            <div className="mt-10 grid grid-cols-3 gap-6 rounded-2xl border border-border/60 bg-card/40 p-6 backdrop-blur-md shadow-lg shadow-black/5">
               <Stat label={t.states} value="28+" />
               <Stat label={t.sources} value="40+" />
-              <Stat label={t.refresh} value={lang === "hi" ? "5 मि" : "5 min"} />
+              <Stat label={t.refresh} value={lang === "hi" ? "5 मिनट" : "5 min"} />
             </div>
           </div>
 

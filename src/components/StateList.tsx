@@ -49,27 +49,29 @@ export default function StateList({
         </div>
       </div>
 
-      <ul className="scroll-thin flex-1 overflow-y-auto py-1">
+      <ul className="scroll-thin flex-1 overflow-y-auto p-2 space-y-1.5">
         {list.map((s) => {
           const active = selected?.name === s.name;
           const count = counts[s.name] ?? 0;
           return (
-            <li key={s.name} className="group/row flex items-center gap-1 px-2">
+            <li key={s.name} className="group/row flex items-center gap-1">
               <button
                 onClick={() => onSelect(active ? null : s)}
-                className={`flex flex-1 items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition ${
+                className={`flex flex-1 items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-xs transition-all ${
                   active
-                    ? "bg-saffron/15 text-saffron"
-                    : "text-foreground/85 hover:bg-card hover:text-foreground"
+                    ? "bg-saffron/15 border-saffron text-saffron"
+                    : count > 0
+                    ? "bg-card/80 border-india-green/40 hover:border-india-green/80 text-foreground"
+                    : "bg-transparent border-transparent hover:bg-card/50 text-muted-foreground"
                 }`}
               >
-                <span className="min-w-0 truncate leading-tight">{s.name}</span>
+                <span className="min-w-0 truncate font-medium leading-tight">{s.name}</span>
                 <span
-                  className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                  className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold transition-colors ${
                     active
                       ? "bg-saffron text-primary-foreground"
                       : count > 0
-                      ? "bg-primary/15 text-primary"
+                      ? "bg-india-green text-primary-foreground"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >

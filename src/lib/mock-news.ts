@@ -32,9 +32,11 @@ function keywordsFor(item: Pick<NewsItem, "title" | "category" | "state" | "city
 }
 
 export function fallbackImage(seed: string, keywords = "india,news"): string {
-  const s = encodeURIComponent(seed || "bharat").slice(0, 24);
-  const kw = encodeURIComponent(keywords);
-  return `https://loremflickr.com/800/450/${kw}?lock=${s}`;
+  // Hash the seed loosely so it stays stable
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) { h = Math.imul(31, h) + seed.charCodeAt(i) | 0; }
+  const s = Math.abs(h);
+  return `https://picsum.photos/seed/${s}/800/450`;
 }
 
 // Hosts that never serve an image on a public https origin (tracking beacons,

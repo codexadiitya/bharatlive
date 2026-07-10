@@ -289,12 +289,7 @@ function Home() {
                   {t.loadingFeed}
                 </span>
               )}
-              {isFallback && !isLoading && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-destructive/10 px-2 py-0.5 text-[11px] text-destructive">
-                  <AlertCircle className="h-3 w-3" />
-                  {t.showingSample}
-                </span>
-              )}
+
             </p>
           </div>
           <div className="flex w-full max-w-sm items-center gap-2">

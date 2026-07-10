@@ -76,13 +76,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
 
   return (
     <article className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-saffron/50 hover:bg-card/80">
-      <Link
-        to="/article/$id"
-        params={{ id: item.id }}
-        className="absolute inset-0 z-10 rounded-xl"
-        aria-label={item.title}
-      />
-      <div className="relative z-[1] aspect-[16/9] w-full overflow-hidden bg-muted">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         <img
           src={newsImage(item)}
           alt={item.title}
@@ -106,7 +100,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           }}
         />
       </div>
-      <div className="relative z-[1] p-5">
+      <div className="relative p-5">
 
       <div className="relative z-20 mb-3 flex items-center justify-between gap-2">
         <span
@@ -136,11 +130,17 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           <span className="ml-1 text-[11px] text-muted-foreground">{timeAgo(item.publishedAt)}</span>
         </div>
       </div>
-      <h3 className="relative z-[1] text-base font-semibold leading-snug text-foreground group-hover:text-saffron">
-        {item.title}
+      <h3 className="relative text-base font-semibold leading-snug text-foreground group-hover:text-saffron">
+        <Link
+          to="/article/$id"
+          params={{ id: item.id }}
+          className="before:absolute before:inset-0 before:z-10"
+        >
+          {item.title}
+        </Link>
       </h3>
-      <p className="relative z-[1] mt-2 text-sm leading-relaxed text-muted-foreground">{item.summary}</p>
-      <div className="relative z-[1] mt-4 flex items-center justify-between text-xs text-muted-foreground">
+      <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">{item.summary}</p>
+      <div className="relative mt-4 flex items-center justify-between text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1">
           <MapPin className="h-3 w-3" />
           {item.city}, {item.state}

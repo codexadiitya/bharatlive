@@ -1,4 +1,4 @@
-﻿import { createServerFn } from "@tanstack/react-start";
+import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { chatCompletionsUrl, getAiGatewayConfig } from "./ai-gateway.server";
 import { INDIA_STATES, MOCK_NEWS, sanitizeImageUrl, type NewsCategory, type NewsItem } from "./mock-news";
@@ -344,7 +344,7 @@ export const fetchNews = createServerFn({ method: "GET" })
         const tagged = tagStateAndCity(a.title) ?? { state: "National", city: "India" };
         seen.add(dedupeKey);
         items.push({
-          id: dedupeKey,
+          id: Buffer.from(dedupeKey).toString("base64url"),
           title: a.title,
           summary: a.domain,
           state: tagged.state,

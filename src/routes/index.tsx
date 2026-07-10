@@ -232,12 +232,6 @@ function Home() {
               >
                 {t.readFeed}
               </a>
-              <button
-                onClick={() => setSelected(null)}
-                className="rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium transition hover:border-saffron/50"
-              >
-                {t.resetView}
-              </button>
             </div>
             <div className="mt-10 grid grid-cols-3 gap-6 rounded-2xl border border-border/60 bg-card/40 p-6 backdrop-blur-md shadow-lg shadow-black/5">
               <Stat label={t.states} value="28+" />

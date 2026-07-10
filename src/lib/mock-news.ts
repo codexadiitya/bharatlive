@@ -229,13 +229,7 @@ export const MOCK_NEWS: NewsItem[] = [
     state: "Telangana", city: "Hyderabad", category: "Politics",
     source: "Deccan Chronicle", publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
   },
-  {
-    id: "9",
-    title: "Jaipur Literature Festival announces 2027 headliners",
-    summary: "Arundhati Roy, Yuval Harari and Perumal Murugan lead a 300-author lineup at Diggi Palace this January.",
-    state: "Rajasthan", city: "Jaipur", category: "Culture",
-    source: "The Wire", publishedAt: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString(),
-  },
+
   {
     id: "10",
     title: "Lucknow's Chikankari artisans get GI-tagged e-commerce platform",

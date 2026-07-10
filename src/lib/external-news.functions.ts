@@ -262,7 +262,31 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
     );
 
     if (merged.length === 0) {
-      return { items: cached?.items ?? [], fallback: true };
+      const fallbackItems = cached?.items && cached.items.length > 0
+        ? cached.items
+        : [
+            {
+              id: "sports-1",
+              title: "Virat Kohli's century leads India to victory in thrilling final",
+              summary: "A spectacular performance by the former captain secured the win...",
+              url: "#",
+              source: "SportsNet",
+              publishedAt: new Date().toISOString(),
+              thumbnail: "https://image.pollinations.ai/prompt/cricket%20stadium%20india?width=800&height=450&nologo=true",
+              category: "Sports",
+            },
+            {
+              id: "sports-2",
+              title: "Indian Football team secures spot in Asian Cup knockout stages",
+              summary: "A 2-1 victory against the rivals ensured qualification...",
+              url: "#",
+              source: "Goal India",
+              publishedAt: new Date(Date.now() - 3600000).toISOString(),
+              thumbnail: "https://image.pollinations.ai/prompt/football%20match%20india?width=800&height=450&nologo=true",
+              category: "Sports",
+            }
+          ];
+      return { items: fallbackItems, fallback: true };
     }
 
     cache.set(key, { at: now, items: merged });
@@ -557,7 +581,31 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
     );
 
     if (merged.length === 0) {
-      return { items: cached?.items ?? [], fallback: true };
+      const fallbackItems = cached?.items && cached.items.length > 0
+        ? cached.items
+        : [
+            {
+              id: "world-1",
+              title: "Global Summit discusses new climate action targets",
+              summary: "World leaders gathered today to announce new commitments...",
+              url: "#",
+              source: "Global News",
+              publishedAt: new Date().toISOString(),
+              thumbnail: "https://image.pollinations.ai/prompt/united%20nations%20summit?width=800&height=450&nologo=true",
+              category: "World",
+            },
+            {
+              id: "world-2",
+              title: "Tech innovations shaping the future of global finance",
+              summary: "New frameworks are being adopted across major economies...",
+              url: "#",
+              source: "Tech World",
+              publishedAt: new Date(Date.now() - 3600000).toISOString(),
+              thumbnail: "https://image.pollinations.ai/prompt/global%20finance%20technology?width=800&height=450&nologo=true",
+              category: "World",
+            }
+          ];
+      return { items: fallbackItems, fallback: true };
     }
 
     cache.set(key, { at: now, items: merged });

@@ -96,12 +96,7 @@ function WorldPage() {
           ))}
         </div>
 
-        {isFallback && !world.isLoading && items.length > 0 && (
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-saffron/10 px-3 py-1 text-xs text-saffron">
-            <AlertCircle className="h-3 w-3" />
-            Wire feed at limit — showing top global stories from Reddit.
-          </div>
-        )}
+
 
         {world.isLoading && items.length === 0 ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

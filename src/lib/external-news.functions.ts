@@ -391,7 +391,6 @@ async function fetchGdeltWorld(query: string, maxRecords = 50): Promise<GdeltArt
 function decodeHtml(s: string): string {
   return s
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/<[^>]+>/g, "")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -399,6 +398,7 @@ function decodeHtml(s: string): string {
     .replace(/&#39;/g, "'")
     .replace(/&#x27;/g, "'")
     .replace(/&nbsp;/g, " ")
+    .replace(/<[^>]+>/g, "")
     .trim();
 }
 

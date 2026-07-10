@@ -272,7 +272,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "SportsNet",
               publishedAt: new Date().toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/cricket%20stadium%20india?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             },
             {
@@ -282,7 +282,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Goal India",
               publishedAt: new Date(Date.now() - 3600000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/football%20match%20india?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1518605368461-1ee12523dc70?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             },
             {
@@ -292,7 +292,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Athletics Now",
               publishedAt: new Date(Date.now() - 7200000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/javelin%20throw%20athletics%20stadium?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             },
             {
@@ -302,7 +302,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Badminton World",
               publishedAt: new Date(Date.now() - 10800000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/badminton%20court%20match?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             },
             {
@@ -312,7 +312,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Hockey Times",
               publishedAt: new Date(Date.now() - 14400000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/field%20hockey%20match%20stadium?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             },
             {
@@ -322,7 +322,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Chess Daily",
               publishedAt: new Date(Date.now() - 18000000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/chess%20tournament%20board?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1580541832626-2a7131ee809f?q=80&w=800&auto=format&fit=crop",
               category: "Sports",
             }
           ];
@@ -595,7 +595,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
         url: a.url,
         source: a.source,
         publishedAt: a.publishedAt,
-        thumbnail: `https://image.pollinations.ai/prompt/${encodeURIComponent(a.title.slice(0, 40) + " news photorealistic")}?width=800&height=450&nologo=true&seed=${Math.abs(Math.imul(31, a.title.charCodeAt(0)) + a.title.charCodeAt(a.title.length - 1))}`,
+        thumbnail: null,
         category: "World",
       }));
     } catch (err) {
@@ -631,7 +631,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Global News",
               publishedAt: new Date().toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/united%20nations%20summit?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=800&auto=format&fit=crop",
               category: "World",
             },
             {
@@ -641,7 +641,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Tech World",
               publishedAt: new Date(Date.now() - 3600000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/global%20finance%20technology?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop",
               category: "World",
             },
             {
@@ -651,7 +651,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Euro News",
               publishedAt: new Date(Date.now() - 7200000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/european%20union%20trade%20agreement%20handshake?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1544725121-be3bf52e2dc8?q=80&w=800&auto=format&fit=crop",
               category: "World",
             },
             {
@@ -661,7 +661,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Science Today",
               publishedAt: new Date(Date.now() - 10800000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/renewable%20energy%20technology%20tokyo%20solar?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1509391366360-12009a308569?q=80&w=800&auto=format&fit=crop",
               category: "World",
             },
             {
@@ -671,7 +671,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Space Network",
               publishedAt: new Date(Date.now() - 14400000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/international%20space%20station%20astronauts?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
               category: "World",
             },
             {
@@ -681,7 +681,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
               url: "#",
               source: "Health Daily",
               publishedAt: new Date(Date.now() - 18000000).toISOString(),
-              thumbnail: "https://image.pollinations.ai/prompt/global%20health%20travel%20airport?width=800&height=450&nologo=true",
+              thumbnail: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop",
               category: "World",
             }
           ];

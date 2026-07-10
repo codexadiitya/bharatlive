@@ -32,11 +32,15 @@ function keywordsFor(item: Pick<NewsItem, "title" | "category" | "state" | "city
 }
 
 export function fallbackImage(seed: string, keywords = "india,news"): string {
-  // Hash the seed loosely so it stays stable
+  const images = [
+    "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?q=80&w=800&auto=format&fit=crop",
+  ];
   let h = 0;
   for (let i = 0; i < seed.length; i++) { h = Math.imul(31, h) + seed.charCodeAt(i) | 0; }
-  const s = Math.abs(h);
-  return `https://picsum.photos/seed/${s}/800/450`;
+  return images[Math.abs(h) % images.length];
 }
 
 // Hosts that never serve an image on a public https origin (tracking beacons,

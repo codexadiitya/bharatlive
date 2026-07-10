@@ -257,7 +257,7 @@ export const fetchSportsNews = createServerFn({ method: "GET" })
     }
 
     const seenIds = new Set<string>();
-    const merged = [...newsDataItems, ...redditItems].filter((a) =>
+    const merged = [...newsDataItems].filter((a) =>
       seenIds.has(a.id) ? false : (seenIds.add(a.id), true),
     );
 
@@ -576,7 +576,7 @@ export const fetchWorldNews = createServerFn({ method: "GET" })
     }
 
     const merged = mergeWorldItems(
-      [...newsDataItems, ...gnewsItems, ...gdeltItems, ...redditItems],
+      [...newsDataItems, ...gnewsItems, ...gdeltItems],
       now,
     );
 

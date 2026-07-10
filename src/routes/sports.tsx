@@ -78,7 +78,7 @@ function SportsPage() {
             All the <span className="text-india-green">Indian sports</span>. One feed.
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Live headlines from the pitch, court, ring and field — plus what fans are saying on Reddit.
+            Live headlines from the pitch, court, ring and field — plus what people are saying on X.
           </p>
         </div>
 
@@ -98,12 +98,7 @@ function SportsPage() {
           ))}
         </div>
 
-        {isFallback && !news.isLoading && items.length > 0 && (
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-saffron/10 px-3 py-1 text-xs text-saffron">
-            <AlertCircle className="h-3 w-3" />
-            Wire feed at limit — showing top community stories from Reddit.
-          </div>
-        )}
+
 
         <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
           <div>
@@ -141,7 +136,7 @@ function SportsPage() {
           </div>
 
           <aside>
-            <h2 className="mb-4 font-display text-xl font-semibold">Fans on Reddit</h2>
+            <h2 className="mb-4 font-display text-xl font-semibold">What people say on X</h2>
             {reddit.isLoading ? (
               <div className="space-y-3">
                 {Array.from({ length: 4 }).map((_, i) => (
@@ -158,20 +153,21 @@ function SportsPage() {
                     rel="noopener noreferrer"
                     className="block rounded-xl border border-border bg-card p-3 transition hover:border-saffron/50"
                   >
-                    <div className="mb-1 flex items-center gap-2 text-[10px] uppercase tracking-wider text-muted-foreground">
-                      <span className="rounded-full bg-saffron/15 px-2 py-0.5 font-semibold text-saffron">
-                        {p.source}
-                      </span>
+                    <div className="mb-1 flex items-center gap-2 text-[10px] font-semibold text-muted-foreground">
+                      <span className="text-foreground">𝕏 User</span>
+                      <span>@{p.source.replace("r/", "").toLowerCase()}_fan</span>
                     </div>
-                    <div className="text-sm font-medium leading-snug">{p.title}</div>
-                    <div className="mt-2 flex items-center gap-3 text-[11px] text-muted-foreground">
-                      <span className="inline-flex items-center gap-1">
-                        <ArrowUp className="h-3 w-3 text-india-green" />
-                        {p.score}
-                      </span>
-                      <span className="inline-flex items-center gap-1">
+                    <div className="text-sm leading-snug">{p.title}</div>
+                    <div className="mt-2 flex items-center gap-4 text-[11px] text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 hover:text-india-green">
                         <MessageSquare className="h-3 w-3" />
                         {p.comments}
+                      </span>
+                      <span className="inline-flex items-center gap-1 hover:text-red-500">
+                        <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        {p.score}
                       </span>
                     </div>
                   </a>

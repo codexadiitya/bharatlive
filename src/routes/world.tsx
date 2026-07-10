@@ -29,12 +29,12 @@ export const Route = createFileRoute("/world")({
       {
         name: "description",
         content:
-          "Global news for Indian readers: USA, UK, Europe, Asia, Middle East, Africa and the Americas — headlines plus Reddit community reactions.",
+          "Global news for Indian readers: USA, UK, Europe, Asia, Middle East, Africa and the Americas — headlines plus what people say on X.",
       },
       { property: "og:title", content: "World News — Global headlines" },
       {
         property: "og:description",
-        content: "Trusted global headlines and Reddit community discussion, curated for Indian readers.",
+        content: "Trusted global headlines and X community discussion, curated for Indian readers.",
       },
     ],
   }),

@@ -79,7 +79,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
       <Link
         to="/article/$id"
         params={{ id: item.id }}
-        className="absolute inset-0 z-0 rounded-xl"
+        className="absolute inset-0 z-10 rounded-xl"
         aria-label={item.title}
       />
       <div className="relative z-[1] aspect-[16/9] w-full overflow-hidden bg-muted">
@@ -108,7 +108,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
       </div>
       <div className="relative z-[1] p-5">
 
-      <div className="relative z-10 mb-3 flex items-center justify-between gap-2">
+      <div className="relative z-20 mb-3 flex items-center justify-between gap-2">
         <span
           className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium tracking-wide ${
             categoryColor[item.category] ?? "bg-muted text-muted-foreground border-border"
@@ -149,7 +149,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
       </div>
       <button
         onClick={onVerify}
-        className="relative z-10 mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-chakra/40 bg-chakra/10 px-3 py-1.5 text-xs font-medium text-chakra transition hover:bg-chakra/20"
+        className="relative z-20 mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-chakra/40 bg-chakra/10 px-3 py-1.5 text-xs font-medium text-chakra transition hover:bg-chakra/20"
       >
         {verifying ? <Loader2 className="h-3 w-3 animate-spin" /> : <ShieldCheck className="h-3 w-3" />}
         {lang === "hi" ? "AI से सत्यापित करें" : "Verify with AI"}

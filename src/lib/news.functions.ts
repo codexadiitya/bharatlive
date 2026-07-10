@@ -326,7 +326,7 @@ export const fetchNews = createServerFn({ method: "GET" })
             category: mapCategory(a.category),
             source: a.source_name || a.source_id || "News",
             publishedAt: new Date(a.pubDate.replace(" ", "T") + "Z").toISOString(),
-            image: sanitizeImageUrl(a.image_url),
+            image: sanitizeImageUrl(a.image_url) || `https://image.pollinations.ai/prompt/${encodeURIComponent(a.title.slice(0, 40) + " news photorealistic")}?width=800&height=450&nologo=true&seed=${Math.abs(Math.imul(31, a.title.charCodeAt(0)) + a.title.charCodeAt(a.title.length - 1))}`,
           });
         }
       }
@@ -352,7 +352,7 @@ export const fetchNews = createServerFn({ method: "GET" })
           category: "Politics",
           source: a.domain,
           publishedAt: gdeltDateToISO(a.seendate),
-          image: sanitizeImageUrl(a.socialimage),
+          image: sanitizeImageUrl(a.socialimage) || `https://image.pollinations.ai/prompt/${encodeURIComponent(a.title.slice(0, 40) + " news photorealistic")}?width=800&height=450&nologo=true&seed=${Math.abs(Math.imul(31, a.title.charCodeAt(0)) + a.title.charCodeAt(a.title.length - 1))}`,
         });
       }
 
@@ -469,7 +469,7 @@ export const fetchStateNews = createServerFn({ method: "GET" })
           category: mapCategory(a.category),
           source: a.source_name || a.source_id || "News",
           publishedAt: new Date(a.pubDate.replace(" ", "T") + "Z").toISOString(),
-          image: sanitizeImageUrl(a.image_url),
+          image: sanitizeImageUrl(a.image_url) || `https://image.pollinations.ai/prompt/${encodeURIComponent(a.title.slice(0, 40) + " news photorealistic")}?width=800&height=450&nologo=true&seed=${Math.abs(Math.imul(31, a.title.charCodeAt(0)) + a.title.charCodeAt(a.title.length - 1))}`,
         });
       }
 

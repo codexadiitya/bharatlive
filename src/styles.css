@@ -123,7 +123,7 @@
   to { transform: translateX(-50%); }
 }
 .animate-ticker {
-  animation: ticker 40s linear infinite;
+  animation: ticker 120s linear infinite;
 }
 
 @keyframes pulse-dot {

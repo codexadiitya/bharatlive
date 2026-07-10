@@ -147,6 +147,9 @@ export const INDIA_STATES: StateInfo[] = [
   { name: "Bihar", code: "BR", lat: 25.09, lng: 85.31, capital: "Patna" },
   { name: "Odisha", code: "OD", lat: 20.95, lng: 85.09, capital: "Bhubaneswar" },
   { name: "Madhya Pradesh", code: "MP", lat: 22.97, lng: 78.65, capital: "Bhopal" },
+  { name: "Jammu and Kashmir", code: "JK", lat: 33.77, lng: 76.57, capital: "Srinagar" },
+  { name: "Himachal Pradesh", code: "HP", lat: 31.10, lng: 77.17, capital: "Shimla" },
+  { name: "Uttarakhand", code: "UK", lat: 30.06, lng: 79.01, capital: "Dehradun" },
 ];
 
 export const MOCK_NEWS: NewsItem[] = [
@@ -219,6 +222,34 @@ export const MOCK_NEWS: NewsItem[] = [
     summary: "A UP government portal launches to sell direct-to-consumer, cutting middlemen for 2.5 lakh artisans.",
     state: "Uttar Pradesh", city: "Lucknow", category: "Business",
     source: "Times of India", publishedAt: new Date(Date.now() - 9 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "11",
+    title: "Snowfall in higher reaches of Gulmarg brings early winter tourists",
+    summary: "The unexpected snowfall has led to a 40% surge in hotel bookings for the coming weekend.",
+    state: "Jammu and Kashmir", city: "Srinagar", category: "Culture",
+    source: "Greater Kashmir", publishedAt: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "12",
+    title: "Apple harvest breaks records in Shimla despite erratic monsoon",
+    summary: "Horticulture department reports a 20% yield increase this season with premium grades dominating the boxes.",
+    state: "Himachal Pradesh", city: "Shimla", category: "Business",
+    source: "The Tribune", publishedAt: new Date(Date.now() - 14 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "13",
+    title: "Char Dham Yatra sets new footfall record; infrastructure pushed to limit",
+    summary: "Over 5 million pilgrims have completed the yatra this year, prompting calls for stricter carrying capacity norms.",
+    state: "Uttarakhand", city: "Dehradun", category: "Politics",
+    source: "Hindustan Times", publishedAt: new Date(Date.now() - 15 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "14",
+    title: "Punjab to subsidize solar pumps by 80% to curb groundwater depletion",
+    summary: "The massive agricultural push aims to transition 1 lakh farmers away from grid power in the first phase.",
+    state: "Punjab", city: "Chandigarh", category: "Tech",
+    source: "The Indian Express", publishedAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString(),
   },
 ];
 

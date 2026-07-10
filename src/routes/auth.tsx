@@ -1,4 +1,4 @@
-﻿import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { signInWithOAuth } from "@/integrations/auth";
@@ -80,48 +80,56 @@ function AuthPage() {
       return;
     }
 
-    if (mode === "signup") {
-      const parsed = signUpSchema.safeParse({ name, email, password });
-      if (!parsed.success) {
-        const errs: Record<string, string> = {};
-        for (const issue of parsed.error.issues) errs[issue.path[0] as string] = issue.message;
-        setErrors(errs);
-        return;
+    try {
+      if (mode === "signup") {
+        const parsed = signUpSchema.safeParse({ name, email, password });
+        if (!parsed.success) {
+          const errs: Record<string, string> = {};
+          for (const issue of parsed.error.issues) errs[issue.path[0] as string] = issue.message;
+          setErrors(errs);
+          return;
+        }
+        setEmailLoading(true);
+        const { error } = await client.auth.signUp({
+          email: parsed.data.email,
+          password: parsed.data.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/auth`,
+            data: { display_name: parsed.data.name },
+          },
+        });
+        setEmailLoading(false);
+        if (error) {
+          const msg = error.message || (error as any).error_description || "Sign up failed. Please try again.";
+          toast.error(typeof msg === "string" ? msg : JSON.stringify(error));
+          return;
+        }
+        toast.success("Account created! Check your inbox to confirm your email.");
+      } else {
+        const parsed = signInSchema.safeParse({ email, password });
+        if (!parsed.success) {
+          const errs: Record<string, string> = {};
+          for (const issue of parsed.error.issues) errs[issue.path[0] as string] = issue.message;
+          setErrors(errs);
+          return;
+        }
+        setEmailLoading(true);
+        const { error } = await client.auth.signInWithPassword({
+          email: parsed.data.email,
+          password: parsed.data.password,
+        });
+        setEmailLoading(false);
+        if (error) {
+          const msg = error.message || (error as any).error_description || "Sign in failed. Please try again.";
+          toast.error(typeof msg === "string" ? msg : JSON.stringify(error));
+          return;
+        }
+        toast.success("Welcome back!");
       }
-      setEmailLoading(true);
-      const { error } = await client.auth.signUp({
-        email: parsed.data.email,
-        password: parsed.data.password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth`,
-          data: { display_name: parsed.data.name },
-        },
-      });
+    } catch (err: any) {
       setEmailLoading(false);
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-      toast.success("Account created! Check your inbox to confirm your email.");
-    } else {
-      const parsed = signInSchema.safeParse({ email, password });
-      if (!parsed.success) {
-        const errs: Record<string, string> = {};
-        for (const issue of parsed.error.issues) errs[issue.path[0] as string] = issue.message;
-        setErrors(errs);
-        return;
-      }
-      setEmailLoading(true);
-      const { error } = await client.auth.signInWithPassword({
-        email: parsed.data.email,
-        password: parsed.data.password,
-      });
-      setEmailLoading(false);
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-      toast.success("Welcome back!");
+      const msg = err?.message || "An unexpected error occurred.";
+      toast.error(typeof msg === "string" ? msg : JSON.stringify(err));
     }
   };
 

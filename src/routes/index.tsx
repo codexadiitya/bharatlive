@@ -235,12 +235,27 @@ function Home() {
             <span className="inline-flex items-center gap-2 rounded-full border border-saffron/30 bg-saffron/5 px-3 py-1 text-xs font-semibold text-saffron tracking-wide">
               {t.interactiveBadge}
             </span>
-            <h1 className="mt-5 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl text-foreground">
-              {t.heroLead}{" "}
-              <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-saffron bg-saffron/10 border border-saffron/20 rounded-2xl">
-                {t.heroClick}
-              </span>{" "}
-              {t.heroTail}
+            <h1 className="mt-5 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl">
+              {lang === "en" ? (
+                <>
+                  <span className="text-slate-800 dark:text-white">India,</span>{" "}
+                  <span className="text-[#E7581C]">one</span>{" "}
+                  <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-[#DC2626] bg-[#DC2626]/5 border border-[#DC2626]/20 rounded-2xl">
+                    click
+                  </span>{" "}
+                  <span className="text-[#7C3AED]">at a</span>{" "}
+                  <span className="text-[#2563EB]">time.</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-slate-800 dark:text-white">भारत,</span>{" "}
+                  <span className="text-[#E7581C]">एक</span>{" "}
+                  <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-[#DC2626] bg-[#DC2626]/5 border border-[#DC2626]/20 rounded-2xl">
+                    क्लिक
+                  </span>{" "}
+                  <span className="text-[#2563EB]">में।</span>
+                </>
+              )}
             </h1>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground/90">
               {t.heroDesc}

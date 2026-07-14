@@ -89,6 +89,22 @@ function Home() {
             <Logo className="h-9 w-auto shrink-0 transition-transform group-hover:scale-[1.02]" />
           </Link>
 
+          {/* Primary nav */}
+          <nav className="hidden items-center justify-center gap-6 text-sm font-semibold text-foreground/80 lg:flex">
+            <Link to="/explore" activeProps={{ className: "text-saffron" }} className="transition-colors hover:text-saffron">{t.explore}</Link>
+            <Link to="/feed" activeProps={{ className: "text-saffron" }} className="transition-colors hover:text-saffron">{t.feed}</Link>
+            <Link to="/sports" activeProps={{ className: "text-saffron" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+              <Trophy className="h-4 w-4" /> {t.sports}
+            </Link>
+            <Link to="/world" activeProps={{ className: "text-saffron" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+              <Globe2 className="h-4 w-4" /> {t.world}
+            </Link>
+            <Link to="/bot" activeProps={{ className: "text-saffron" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
+              <Bot className="h-4 w-4" /> Bot
+            </Link>
+            <a href="#about" className="text-muted-foreground transition-colors hover:text-foreground">{t.about}</a>
+          </nav>
+
           {/* Utilities */}
           <div className="flex items-center gap-2 sm:gap-3">
             <LangToggle />
@@ -104,7 +120,7 @@ function Home() {
               <button
                 onClick={signOut}
                 title={user?.email ?? ""}
-                className="ml-1 hidden items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-xs font-semibold text-background shadow-lg shadow-foreground/10 transition-all duration-300 hover:bg-saffron hover:text-primary-foreground hover:scale-[1.02] active:scale-95 sm:inline-flex"
+                className="ml-1 hidden items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-saffron/20 transition-all duration-300 hover:bg-saffron/90 hover:scale-[1.02] active:scale-95 sm:inline-flex"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>{t.signOut}</span>
@@ -112,7 +128,7 @@ function Home() {
             ) : (
               <button
                 onClick={() => setAuthModalOpen(true)}
-                className="ml-1 hidden items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-xs font-semibold text-background shadow-lg shadow-foreground/10 transition-all duration-300 hover:bg-saffron hover:text-primary-foreground hover:scale-[1.02] active:scale-95 sm:inline-flex"
+                className="ml-1 hidden items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-saffron/20 transition-all duration-300 hover:bg-saffron/90 hover:scale-[1.02] active:scale-95 sm:inline-flex"
               >
                 <LogIn className="h-3.5 w-3.5" />
                 <span>{t.signIn}</span>
@@ -417,10 +433,15 @@ function Home() {
       <section id="about" className="border-t border-border/60 bg-card/30">
         <div className="mx-auto max-w-7xl px-6 py-12">
           <div className="grid gap-10 lg:grid-cols-2">
-            <div>
-              <h2 className="font-display text-2xl font-bold tracking-tight">BharatLive</h2>
-              <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-                {t.footerBlurb}
+            <div className="flex flex-col items-start text-left">
+              <span className="inline-flex items-center gap-2 rounded-full border border-saffron/30 bg-saffron/5 px-3 py-1 text-xs font-semibold text-saffron tracking-wide">
+                ABOUT BHARATLIVE
+              </span>
+              <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground">
+                India, one <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-saffron bg-saffron/10 border border-saffron/20 rounded-2xl">click</span> at a time.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground/80 max-w-md">
+                Built as an interactive India news explorer.
               </p>
             </div>
             <FeedbackForm

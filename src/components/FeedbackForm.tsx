@@ -50,49 +50,49 @@ export default function FeedbackForm({ labels }: { labels: { title: string; subt
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border bg-card/65 p-6 shadow-sm backdrop-blur">
       <div>
-        <h3 className="font-display text-xl font-semibold tracking-tight">{labels.title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{labels.subtitle}</p>
+        <h3 className="font-display text-lg font-bold tracking-tight text-foreground">{labels.title}</h3>
+        <p className="mt-1 text-xs text-muted-foreground">{labels.subtitle}</p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium">{labels.name}</label>
+        <div className="space-y-1.5 text-left">
+          <label className="text-xs font-semibold text-foreground/80">{labels.name}</label>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
             disabled={loading}
-            className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
+            className="rounded-full border-border/80 bg-background/30 focus-visible:ring-saffron"
           />
         </div>
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium">{labels.email}</label>
+        <div className="space-y-1.5 text-left">
+          <label className="text-xs font-semibold text-foreground/80">{labels.email}</label>
           <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             disabled={loading}
-            className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
+            className="rounded-full border-border/80 bg-background/30 focus-visible:ring-saffron"
           />
-          {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
+          {errors.email && <p className="text-[10px] text-destructive">{errors.email}</p>}
         </div>
       </div>
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium">{labels.message}</label>
+      <div className="space-y-1.5 text-left">
+        <label className="text-xs font-semibold text-foreground/80">{labels.message}</label>
         <Textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us what needs to change or improve..."
-          rows={4}
+          rows={3}
           disabled={loading}
-          className="rounded-xl border-white/10 bg-background/50 focus-visible:ring-saffron"
+          className="rounded-2xl border-border/80 bg-background/30 focus-visible:ring-saffron"
         />
-        {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
+        {errors.message && <p className="text-[10px] text-destructive">{errors.message}</p>}
       </div>
-      <Button type="submit" disabled={loading} className="w-full rounded-xl bg-saffron hover:bg-saffron/90 text-primary-foreground">
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+      <Button type="submit" disabled={loading} className="w-full rounded-full bg-saffron hover:bg-saffron/90 text-primary-foreground shadow-md shadow-saffron/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 py-5 font-semibold text-xs uppercase tracking-wider">
+        {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
         {loading ? labels.sending : labels.send}
       </Button>
     </form>

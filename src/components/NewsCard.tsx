@@ -75,7 +75,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
   };
 
   return (
-    <article className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-saffron/50 hover:bg-card/80">
+    <article className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-saffron/40 hover:shadow-lg hover:shadow-saffron/5">
       {newsImage(item) && (
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
           <img
@@ -96,7 +96,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           />
         </div>
       )}
-      <div className="relative p-5">
+      <div className="relative p-5 text-left">
 
       <div className="relative z-20 mb-3 flex items-center justify-between gap-2">
         <span
@@ -104,12 +104,12 @@ export default function NewsCard({ item }: { item: NewsItem }) {
             categoryColor[item.category] ?? "bg-muted text-muted-foreground border-border"
           }`}
         >
-          {catLabel}
+          {lang === "hi" ? CATEGORY_HI[item.category] ?? item.category : item.category}
         </span>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={onBookmark}
-            className={`relative z-10 rounded-full p-1.5 transition hover:bg-muted ${
+            className={`relative z-10 rounded-full p-1.5 transition-all hover:bg-muted active:scale-90 ${
               saved ? "text-saffron" : "text-muted-foreground"
             }`}
             aria-label={saved ? "Remove bookmark" : "Bookmark"}
@@ -118,7 +118,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           </button>
           <button
             onClick={onShare}
-            className="relative z-10 rounded-full p-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            className="relative z-10 rounded-full p-1.5 text-muted-foreground transition-all hover:bg-muted hover:text-foreground active:scale-90"
             aria-label="Share"
           >
             <Share2 className="h-3.5 w-3.5" />
@@ -130,24 +130,24 @@ export default function NewsCard({ item }: { item: NewsItem }) {
         <Link
           to="/article/$id"
           params={{ id: item.id }}
-          className="before:absolute before:inset-0 before:z-10"
+          className="before:absolute before:inset-0 before:z-10 font-display"
         >
           {item.title}
         </Link>
       </h3>
       <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">{item.summary}</p>
       <div className="relative mt-4 flex items-center justify-between text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1">
-          <MapPin className="h-3 w-3" />
+        <span className="inline-flex items-center gap-1 font-medium">
+          <MapPin className="h-3.5 w-3.5 text-saffron" />
           {item.city}, {item.state}
         </span>
-        <span className="font-medium text-foreground/70">{item.source}</span>
+        <span className="font-semibold text-foreground/75 uppercase">{item.source}</span>
       </div>
       <button
         onClick={onVerify}
-        className="relative z-20 mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-chakra/40 bg-chakra/10 px-3 py-1.5 text-xs font-medium text-chakra transition hover:bg-chakra/20"
+        className="relative z-20 mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-indigo-200/60 bg-indigo-50/50 dark:border-slate-800/80 dark:bg-slate-900/30 px-3 py-2.5 text-xs font-bold text-indigo-700 dark:text-slate-300 shadow-sm transition-all duration-200 hover:bg-indigo-100/70 dark:hover:bg-slate-800/50 active:scale-95"
       >
-        {verifying ? <Loader2 className="h-3 w-3 animate-spin" /> : <ShieldCheck className="h-3 w-3" />}
+        {verifying ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <ShieldCheck className="h-3.5 w-3.5" />}
         {lang === "hi" ? "AI से सत्यापित करें" : "Verify with AI"}
       </button>
       </div>

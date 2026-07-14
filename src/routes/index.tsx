@@ -130,67 +130,6 @@ function Home() {
           </div>
         </div>
 
-        {/* Beautiful Slide-over Drawer (Right Side) */}
-        {menuOpen && (
-          <div className="fixed inset-0 z-50 overflow-hidden">
-            {/* Backdrop overlay */}
-            <div 
-              className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity"
-              onClick={() => setMenuOpen(false)}
-            />
-            {/* Drawer container */}
-            <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
-              <div className="w-screen max-w-xs transform bg-card p-6 shadow-2xl border-l border-border/40 flex flex-col justify-between transition-all duration-300 ease-out">
-                <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <Logo className="h-8" />
-                    <button 
-                      onClick={() => setMenuOpen(false)}
-                      className="h-8 w-8 rounded-full border border-border flex items-center justify-center hover:border-saffron/40 hover:text-saffron"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
-                  <nav className="flex flex-col gap-4 text-sm font-medium">
-                    <Link to="/explore" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.explore}</Link>
-                    <Link to="/feed" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.feed}</Link>
-                    <Link to="/sports" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
-                      <Trophy className="h-4 w-4" /> {t.sports}
-                    </Link>
-                    <Link to="/world" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
-                      <Globe2 className="h-4 w-4" /> {t.world}
-                    </Link>
-                    <Link to="/bot" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
-                      <Bot className="h-4 w-4" /> Bot
-                    </Link>
-                    <Link to="/bookmarks" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
-                      <Bookmark className="h-4 w-4" /> {t.bookmarks}
-                    </Link>
-                  </nav>
-                </div>
-                <div className="border-t border-border/60 pt-4">
-                  {signedIn ? (
-                    <button
-                      onClick={() => { setMenuOpen(false); signOut(); }}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron/10 border border-saffron/20 px-4 py-2.5 text-xs font-semibold text-saffron transition-all hover:bg-saffron/20"
-                    >
-                      <LogOut className="h-3.5 w-3.5" /> {t.signOut}
-                    </button>
-                  ) : (
-                    <Link
-                      to="/auth"
-                      onClick={() => setMenuOpen(false)}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-md shadow-saffron/10 transition-all hover:opacity-90"
-                    >
-                      <LogIn className="h-3.5 w-3.5" /> {t.signIn}
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Live ticker sub-header */}
         <div className="border-t border-border/40 bg-card/60 overflow-hidden">
           <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-2 sm:px-6">
@@ -213,6 +152,67 @@ function Home() {
           </div>
         </div>
       </header>
+
+      {/* Beautiful Slide-over Drawer (Right Side) */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop overlay */}
+          <div 
+            className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setMenuOpen(false)}
+          />
+          {/* Drawer container */}
+          <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
+            <div className="w-screen max-w-xs transform bg-card p-6 shadow-2xl border-l border-border/40 flex flex-col justify-between transition-all duration-300 ease-out">
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <Logo className="h-8" />
+                  <button 
+                    onClick={() => setMenuOpen(false)}
+                    className="h-8 w-8 rounded-full border border-border flex items-center justify-center hover:border-saffron/40 hover:text-saffron"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                <nav className="flex flex-col gap-4 text-sm font-medium text-left">
+                  <Link to="/explore" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.explore}</Link>
+                  <Link to="/feed" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.feed}</Link>
+                  <Link to="/sports" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                    <Trophy className="h-4 w-4" /> {t.sports}
+                  </Link>
+                  <Link to="/world" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                    <Globe2 className="h-4 w-4" /> {t.world}
+                  </Link>
+                  <Link to="/bot" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                    <Bot className="h-4 w-4" /> Bot
+                  </Link>
+                  <Link to="/bookmarks" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                    <Bookmark className="h-4 w-4" /> {t.bookmarks}
+                  </Link>
+                </nav>
+              </div>
+              <div className="border-t border-border/60 pt-4">
+                {signedIn ? (
+                  <button
+                    onClick={() => { setMenuOpen(false); signOut(); }}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron/10 border border-saffron/20 px-4 py-2.5 text-xs font-semibold text-saffron transition-all hover:bg-saffron/20"
+                  >
+                    <LogOut className="h-3.5 w-3.5" /> {t.signOut}
+                  </button>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setMenuOpen(false)}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-md shadow-saffron/10 transition-all hover:opacity-90"
+                  >
+                    <LogIn className="h-3.5 w-3.5" /> {t.signIn}
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
 
 

@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -38,68 +38,72 @@
 
 :root {
   --radius: 0.75rem;
-  /* Premium warm light parchment */
-  --background: #FAF8F5;
-  --foreground: #1E293B;
-  --card: #FFFFFF;
-  --card-foreground: #1E293B;
-  --popover: #FFFFFF;
-  --popover-foreground: #1E293B;
-  --primary: #D9381E;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F4F1EA;
-  --secondary-foreground: #1E293B;
-  --muted: #F4F1EA;
-  --muted-foreground: #64748B;
-  --accent: #0F9D77;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: rgba(0, 0, 0, 0.08);
-  --input: rgba(0, 0, 0, 0.06);
-  --ring: #D9381E;
-  --saffron: #D9381E;
-  --india-green: #0F9D77;
-  --chakra: #1E293B;
+  --background: #f8f9fc; /* ghost-white */
+  --foreground: #1d1e20; /* dark-gray */
+  --card: #ffffff;
+  --card-foreground: #1d1e20;
+  --popover: #ffffff;
+  --popover-foreground: #1d1e20;
+  --primary: #e15700; /* saffron */
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f9; /* white-smoke */
+  --secondary-foreground: #1d1e20;
+  --muted: #f1f3f9;
+  --muted-foreground: #5e636e; /* dim-gray */
+  --accent: #00823c; /* green */
+  --accent-foreground: #ffffff;
+  --destructive: #df202e; /* red */
+  --destructive-foreground: #ffffff;
+  --border: #dee3ed; /* lavender */
+  --input: #dee3ed;
+  --ring: #e15700;
+  --saffron: #e15700;
+  --india-green: #00823c;
+  --chakra: #111213;
+
+  /* Gradients */
+  --gradient-linear: linear-gradient(to right bottom, #e15700 0%, #e15700 50%, #00823c 100%);
+
   /* Map theme tokens */
-  --map-fill-active: #D9381E;
-  --map-fill-inactive-base: 0.88;
-  --map-stroke-active: #FF7D60;
-  --map-stroke-inactive: rgba(0, 0, 0, 0.08);
-  --map-label-active: #FFFFFF;
-  --map-label-inactive: #475569;
-  --map-label-stroke-active: #D9381E;
-  --map-label-stroke-inactive: #FFFFFF;
+  --map-fill-active: #e15700;
+  --map-fill-inactive-base: 0.92;
+  --map-stroke-active: #ff8540;
+  --map-stroke-inactive: #dee3ed;
+  --map-label-active: #ffffff;
+  --map-label-inactive: #5e636e;
+  --map-label-stroke-active: #e15700;
+  --map-label-stroke-inactive: #ffffff;
 }
 
 .dark {
-  --background: #0F1E3D;
-  --foreground: oklch(0.98 0.005 90);
-  --card: #0B162C;
-  --card-foreground: oklch(0.98 0.005 90);
-  --popover: #0B162C;
-  --popover-foreground: oklch(0.98 0.005 90);
-  --primary: #FF6B35;
-  --primary-foreground: #0B162C;
-  --secondary: #1A2C54;
-  --secondary-foreground: oklch(0.98 0.005 90);
-  --muted: #1A2C54;
-  --muted-foreground: oklch(0.72 0.02 265);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: #FF6B35;
-  --saffron: #FF6B35;
-  --india-green: #0F9D77;
-  --chakra: oklch(0.55 0.20 260);
+  --background: #111213; /* black-1 */
+  --foreground: #f8f9fc; /* ghost-white */
+  --card: #1d1e20; /* dark-gray */
+  --card-foreground: #f8f9fc;
+  --popover: #1d1e20;
+  --popover-foreground: #f8f9fc;
+  --primary: #e15700;
+  --primary-foreground: #ffffff;
+  --secondary: #2f3237; /* dark-gray-1 */
+  --secondary-foreground: #f8f9fc;
+  --muted: #2f3237;
+  --muted-foreground: #8f96a3; /* light-slate-gray */
+  --border: #2f3237; /* dark-gray-1 */
+  --input: #2f3237;
+  --ring: #e15700;
+  --saffron: #e15700;
+  --india-green: #00823c;
+  --chakra: #dee3ed;
+
   /* Map dark tokens */
-  --map-fill-active: #FF6B35;
-  --map-fill-inactive-base: 0.30;
-  --map-stroke-active: #FF9B75;
-  --map-stroke-inactive: #1A2C54;
-  --map-label-active: #0B162C;
-  --map-label-inactive: oklch(0.92 0.02 265);
-  --map-label-stroke-active: #FFFFFF;
-  --map-label-stroke-inactive: #0F1E3D;
+  --map-fill-active: #e15700;
+  --map-fill-inactive-base: 0.25;
+  --map-stroke-active: #ff8540;
+  --map-stroke-inactive: #2f3237;
+  --map-label-active: #111213;
+  --map-label-inactive: #8f96a3;
+  --map-label-stroke-active: #ffffff;
+  --map-label-stroke-inactive: #111213;
 }
 
 @layer base {

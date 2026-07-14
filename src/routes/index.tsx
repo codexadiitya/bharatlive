@@ -83,56 +83,39 @@ function Home() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Top nav — editorial masthead with live ticker sub-row */}
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[auto_1fr_auto]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
           {/* Brand */}
           <Link to="/" className="group flex min-w-0 items-center gap-2">
-            <Logo className="h-8 w-auto shrink-0 transition-transform group-hover:scale-105 sm:h-9" />
+            <Logo className="h-9 w-auto shrink-0 transition-transform group-hover:scale-[1.02]" />
           </Link>
 
-          {/* Primary nav */}
-          <nav className="hidden items-center justify-center gap-8 text-sm font-medium text-foreground/80 lg:flex">
-            <Link to="/explore" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="transition-colors hover:text-saffron">{t.explore}</Link>
-            <Link to="/feed" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="transition-colors hover:text-saffron">{t.feed}</Link>
-            <Link to="/sports" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
-              <Trophy className="h-4 w-4" /> {t.sports}
-            </Link>
-            <Link to="/world" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
-              <Globe2 className="h-4 w-4" /> {t.world}
-            </Link>
-            <Link to="/bot" activeProps={{ className: "text-saffron underline underline-offset-8 decoration-2" }} className="inline-flex items-center gap-1.5 transition-colors hover:text-saffron">
-              <Bot className="h-4 w-4" /> Bot
-            </Link>
-            <a href="#about" className="text-muted-foreground transition-colors hover:text-foreground">{t.about}</a>
-          </nav>
-
           {/* Utilities */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <LangToggle />
-            <div className="hidden h-6 w-px bg-border/70 sm:block" />
             <Link
               to="/bookmarks"
               aria-label={T[lang].bookmarks}
-              className="hidden text-muted-foreground transition-colors hover:text-saffron sm:inline-flex"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition hover:border-saffron/50 hover:text-saffron active:scale-95"
             >
-              <Bookmark className="h-[18px] w-[18px]" />
+              <Bookmark className="h-4 w-4" />
             </Link>
             <ThemeToggle />
             {signedIn ? (
               <button
                 onClick={signOut}
                 title={user?.email ?? ""}
-                className="ml-1 hidden items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-xs font-semibold text-background shadow-lg shadow-foreground/10 transition-all hover:bg-saffron hover:text-primary-foreground active:scale-95 sm:inline-flex"
+                className="ml-1 hidden items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-md shadow-saffron/10 transition-all hover:bg-saffron/90 hover:scale-[1.02] active:scale-95 sm:inline-flex"
               >
                 <LogOut className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">{t.signOut}</span>
+                <span>{t.signOut}</span>
               </button>
             ) : (
               <button
                 onClick={() => setAuthModalOpen(true)}
-                className="ml-1 hidden items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-xs font-semibold text-background shadow-lg shadow-foreground/10 transition-all hover:bg-saffron hover:text-primary-foreground active:scale-95 sm:inline-flex"
+                className="ml-1 hidden items-center gap-2 rounded-full bg-saffron px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-md shadow-saffron/10 transition-all hover:bg-saffron/90 hover:scale-[1.02] active:scale-95 sm:inline-flex"
               >
                 <LogIn className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">{t.signIn}</span>
+                <span>{t.signIn}</span>
               </button>
             )}
             <button
@@ -140,50 +123,71 @@ function Home() {
               aria-label="Open menu"
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((v) => !v)}
-              className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition hover:border-saffron/50 lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:border-saffron/50 hover:text-saffron active:scale-95"
             >
               {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile nav panel */}
+        {/* Beautiful Slide-over Drawer (Right Side) */}
         {menuOpen && (
-          <div className="border-t border-border/60 bg-background/95 backdrop-blur-xl lg:hidden">
-            <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 text-sm font-medium sm:px-6">
-              <Link to="/explore" onClick={() => setMenuOpen(false)} className="rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">{t.explore}</Link>
-              <Link to="/feed" onClick={() => setMenuOpen(false)} className="rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">{t.feed}</Link>
-              <Link to="/sports" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">
-                <Trophy className="h-4 w-4" /> {t.sports}
-              </Link>
-              <Link to="/world" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">
-                <Globe2 className="h-4 w-4" /> {t.world}
-              </Link>
-              <Link to="/bot" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">
-                <Bot className="h-4 w-4" /> Bot
-              </Link>
-              <Link to="/bookmarks" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-card hover:text-saffron">
-                <Bookmark className="h-4 w-4" /> {t.bookmarks}
-              </Link>
-              <div className="mt-2 border-t border-border/60 pt-3">
-                {signedIn ? (
-                  <button
-                    onClick={() => { setMenuOpen(false); signOut(); }}
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-2.5 text-xs font-semibold text-background"
-                  >
-                    <LogOut className="h-3.5 w-3.5" /> {t.signOut}
-                  </button>
-                ) : (
-                  <Link
-                    to="/auth"
-                    onClick={() => setMenuOpen(false)}
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-2.5 text-xs font-semibold text-background"
-                  >
-                    <LogIn className="h-3.5 w-3.5" /> {t.signIn}
-                  </Link>
-                )}
+          <div className="fixed inset-0 z-50 overflow-hidden">
+            {/* Backdrop overlay */}
+            <div 
+              className="absolute inset-0 bg-background/60 backdrop-blur-sm transition-opacity"
+              onClick={() => setMenuOpen(false)}
+            />
+            {/* Drawer container */}
+            <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
+              <div className="w-screen max-w-xs transform bg-card p-6 shadow-2xl border-l border-border/40 flex flex-col justify-between transition-all duration-300 ease-out">
+                <div>
+                  <div className="flex items-center justify-between mb-8">
+                    <Logo className="h-8" />
+                    <button 
+                      onClick={() => setMenuOpen(false)}
+                      className="h-8 w-8 rounded-full border border-border flex items-center justify-center hover:border-saffron/40 hover:text-saffron"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <nav className="flex flex-col gap-4 text-sm font-medium">
+                    <Link to="/explore" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.explore}</Link>
+                    <Link to="/feed" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">{t.feed}</Link>
+                    <Link to="/sports" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                      <Trophy className="h-4 w-4" /> {t.sports}
+                    </Link>
+                    <Link to="/world" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                      <Globe2 className="h-4 w-4" /> {t.world}
+                    </Link>
+                    <Link to="/bot" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                      <Bot className="h-4 w-4" /> Bot
+                    </Link>
+                    <Link to="/bookmarks" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all hover:bg-muted hover:text-saffron">
+                      <Bookmark className="h-4 w-4" /> {t.bookmarks}
+                    </Link>
+                  </nav>
+                </div>
+                <div className="border-t border-border/60 pt-4">
+                  {signedIn ? (
+                    <button
+                      onClick={() => { setMenuOpen(false); signOut(); }}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron/10 border border-saffron/20 px-4 py-2.5 text-xs font-semibold text-saffron transition-all hover:bg-saffron/20"
+                    >
+                      <LogOut className="h-3.5 w-3.5" /> {t.signOut}
+                    </button>
+                  ) : (
+                    <Link
+                      to="/auth"
+                      onClick={() => setMenuOpen(false)}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-saffron px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-md shadow-saffron/10 transition-all hover:opacity-90"
+                    >
+                      <LogIn className="h-3.5 w-3.5" /> {t.signIn}
+                    </Link>
+                  )}
+                </div>
               </div>
-            </nav>
+            </div>
           </div>
         )}
 
@@ -216,22 +220,33 @@ function Home() {
       <section id="explore" className="mx-auto max-w-7xl px-6 py-12 md:py-20">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-saffron/40 bg-saffron/10 px-3 py-1 text-xs font-medium text-saffron">
+            <span className="inline-flex items-center gap-2 rounded-full border border-saffron/30 bg-saffron/5 px-3 py-1 text-xs font-semibold text-saffron tracking-wide">
               {t.interactiveBadge}
             </span>
-            <h1 className="mt-5 font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              {t.heroLead} <span className="text-saffron">{t.heroClick}</span> {t.heroTail}
+            <h1 className="mt-5 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl text-foreground">
+              {t.heroLead}{" "}
+              <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-saffron bg-saffron/10 border border-saffron/20 rounded-2xl">
+                {t.heroClick}
+              </span>{" "}
+              {t.heroTail}
             </h1>
-            <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground/90">
               {t.heroDesc}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#feed"
-                className="rounded-full bg-saffron px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-full bg-saffron px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md shadow-saffron/15 transition-all hover:bg-saffron/90 hover:scale-[1.02] active:scale-95"
               >
-                {t.readFeed}
+                {t.readFeed} <span className="text-lg leading-none">→</span>
               </a>
+              <Link
+                to="/bot"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted hover:border-saffron/30 hover:scale-[1.02] active:scale-95"
+              >
+                <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                Ask BharatBot
+              </Link>
             </div>
             <div className="mt-10 grid grid-cols-3 gap-6 rounded-2xl border border-border/60 bg-card/40 p-6 backdrop-blur-md shadow-lg shadow-black/5">
               <Stat label={t.states} value="28+" />

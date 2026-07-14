@@ -248,19 +248,20 @@ function Home() {
                 Ask BharatBot
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-3 gap-6 rounded-2xl border border-border/60 bg-card/40 p-6 backdrop-blur-md shadow-lg shadow-black/5">
+            <div className="mt-10 grid grid-cols-3 gap-6 rounded-2xl border border-border/40 bg-card/30 p-6 backdrop-blur-md shadow-sm divide-x divide-border/40 text-center">
               <Stat label={t.states} value="28+" />
               <Stat label={t.sources} value="40+" />
               <Stat label={t.refresh} value={lang === "hi" ? "5 मिनट" : "5 min"} />
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-[1fr_220px]">
+          <div className="relative rounded-2xl border border-border/40 bg-card/30 p-5 shadow-sm backdrop-blur-md grid gap-6 sm:grid-cols-[1fr_240px]">
+            <div className="absolute -inset-px rounded-2xl bg-gradient-to-tr from-saffron/10 via-transparent to-india-green/10 opacity-50 -z-10" />
             <div className="relative aspect-[10/11] w-full">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-saffron/20 via-transparent to-india-green/20 blur-3xl" />
               <IndiaMap onSelect={setSelected} selected={selected} />
               {selected && (
-                <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-saffron/40 bg-background/90 px-4 py-1.5 text-xs backdrop-blur-md">
+                <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-saffron/40 bg-background/90 px-4 py-1.5 text-xs shadow-sm backdrop-blur-md">
                   <span className="text-muted-foreground">{t.viewing}</span>{" "}
                   <span className="font-semibold text-saffron">{selected.name}</span>
                 </div>
@@ -306,19 +307,19 @@ function Home() {
               type="button"
               onClick={() => queryClient.invalidateQueries({ queryKey: ["news", lang] })}
               disabled={isLoading}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-card px-3 py-2.5 text-xs font-medium text-muted-foreground transition hover:border-saffron/50 hover:text-foreground disabled:opacity-50"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm px-4 py-2.5 text-xs font-semibold text-muted-foreground transition-all hover:border-saffron/50 hover:text-foreground active:scale-95 disabled:opacity-50"
               title={t.refresh}
             >
               <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`} />
               <span className="hidden sm:inline">{t.refresh}</span>
             </button>
             <div className="relative flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/80" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t.searchHead}
-                className="w-full rounded-full border border-border bg-card py-2.5 pl-9 pr-4 text-sm outline-none transition placeholder:text-muted-foreground focus:border-saffron/60"
+                className="w-full rounded-full border border-border bg-card/60 backdrop-blur-sm py-2.5 pl-10 pr-4 text-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-saffron/60 focus:bg-card focus:ring-1 focus:ring-saffron/40"
               />
             </div>
           </div>
@@ -327,25 +328,25 @@ function Home() {
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <button
             onClick={() => setForYou((v) => !v)}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm transition ${
+            className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm transition-all duration-200 active:scale-95 ${
               forYou
-                ? "border-chakra bg-chakra text-primary-foreground"
-                : "border-chakra/40 bg-chakra/10 text-chakra hover:bg-chakra/20"
+                ? "border-chakra bg-chakra text-primary-foreground font-semibold shadow-md shadow-chakra/10"
+                : "border-chakra/35 bg-chakra/5 text-chakra hover:bg-chakra/10"
             }`}
             title={hasSignal ? undefined : t.forYouTitle}
           >
             <Wand2 className="h-3.5 w-3.5" />
             {t.forYou}
-            {forYou && hasSignal && <span className="ml-1 text-[10px] opacity-80">AI</span>}
+            {forYou && hasSignal && <span className="ml-1 text-[10px] opacity-80 font-bold">AI</span>}
           </button>
           {CATEGORIES.map((c) => (
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`rounded-full border px-4 py-1.5 text-sm transition ${
+              className={`rounded-full border px-4 py-1.5 text-sm transition-all duration-200 active:scale-95 ${
                 category === c
-                  ? "border-saffron bg-saffron text-primary-foreground"
-                  : "border-border bg-card text-muted-foreground hover:border-saffron/50 hover:text-foreground"
+                  ? "border-saffron bg-saffron text-primary-foreground font-semibold shadow-md shadow-saffron/10"
+                  : "border-border bg-card/60 backdrop-blur-sm text-muted-foreground hover:border-saffron/40 hover:text-foreground"
               }`}
             >
               {lang === "hi" ? CATEGORY_HI[c] ?? c : c}
@@ -461,9 +462,9 @@ function Home() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <div className="font-display text-2xl font-bold text-foreground">{value}</div>
-      <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
+    <div className="px-2">
+      <div className="text-2xl font-bold text-saffron tracking-tight font-sans leading-none">{value}</div>
+      <div className="mt-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80 leading-none">{label}</div>
     </div>
   );
 }

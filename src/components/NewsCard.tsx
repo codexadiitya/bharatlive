@@ -75,7 +75,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
   };
 
   return (
-    <article className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-saffron/50 hover:bg-card/80">
+    <article className="group relative overflow-hidden rounded-xl border border-border/80 bg-card/50 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-saffron/40 hover:shadow-lg hover:shadow-saffron/5">
       {newsImage(item) && (
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
           <img
@@ -104,12 +104,12 @@ export default function NewsCard({ item }: { item: NewsItem }) {
             categoryColor[item.category] ?? "bg-muted text-muted-foreground border-border"
           }`}
         >
-          {catLabel}
+          {lang === "hi" ? CATEGORY_HI[item.category] ?? item.category : item.category}
         </span>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={onBookmark}
-            className={`relative z-10 rounded-full p-1.5 transition hover:bg-muted ${
+            className={`relative z-10 rounded-full p-1.5 transition-all hover:bg-muted active:scale-90 ${
               saved ? "text-saffron" : "text-muted-foreground"
             }`}
             aria-label={saved ? "Remove bookmark" : "Bookmark"}
@@ -118,7 +118,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           </button>
           <button
             onClick={onShare}
-            className="relative z-10 rounded-full p-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            className="relative z-10 rounded-full p-1.5 text-muted-foreground transition-all hover:bg-muted hover:text-foreground active:scale-90"
             aria-label="Share"
           >
             <Share2 className="h-3.5 w-3.5" />
@@ -135,17 +135,17 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           {item.title}
         </Link>
       </h3>
-      <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">{item.summary}</p>
+      <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground/80 line-clamp-3">{item.summary}</p>
       <div className="relative mt-4 flex items-center justify-between text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1">
-          <MapPin className="h-3 w-3" />
+        <span className="inline-flex items-center gap-1 font-medium">
+          <MapPin className="h-3.5 w-3.5 text-saffron" />
           {item.city}, {item.state}
         </span>
-        <span className="font-medium text-foreground/70">{item.source}</span>
+        <span className="font-semibold text-foreground/60">{item.source}</span>
       </div>
       <button
         onClick={onVerify}
-        className="relative z-20 mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-chakra/40 bg-chakra/10 px-3 py-1.5 text-xs font-medium text-chakra transition hover:bg-chakra/20"
+        className="relative z-20 mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-chakra/20 bg-chakra/5 px-3 py-2 text-xs font-semibold text-chakra shadow-sm transition-all duration-200 hover:bg-chakra/10 hover:border-chakra/40 active:scale-95"
       >
         {verifying ? <Loader2 className="h-3 w-3 animate-spin" /> : <ShieldCheck className="h-3 w-3" />}
         {lang === "hi" ? "AI से सत्यापित करें" : "Verify with AI"}

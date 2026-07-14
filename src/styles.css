@@ -38,38 +38,38 @@
 
 :root {
   --radius: 0.75rem;
-  /* Warm light parchment */
-  --background: oklch(0.97 0.005 90);
-  --foreground: oklch(0.22 0.03 265);
-  --card: oklch(0.95 0.01 265);
-  --card-foreground: oklch(0.22 0.03 265);
-  --popover: oklch(0.98 0.005 90);
-  --popover-foreground: oklch(0.22 0.03 265);
-  --primary: oklch(0.65 0.16 60);
-  --primary-foreground: oklch(0.15 0.02 265);
-  --secondary: oklch(0.92 0.02 265);
-  --secondary-foreground: oklch(0.22 0.03 265);
-  --muted: oklch(0.90 0.01 265);
-  --muted-foreground: oklch(0.50 0.02 265);
-  --accent: oklch(0.60 0.18 155);
-  --accent-foreground: oklch(0.15 0.02 265);
-  --destructive: oklch(0.65 0.22 25);
-  --destructive-foreground: oklch(0.98 0.005 90);
-  --border: oklch(0 0 0 / 10%);
-  --input: oklch(0 0 0 / 8%);
-  --ring: oklch(0.65 0.16 60);
-  --saffron: oklch(0.65 0.16 60);
-  --india-green: oklch(0.55 0.18 155);
-  --chakra: oklch(0.50 0.20 260);
+  /* Premium warm light parchment */
+  --background: #FAF8F5;
+  --foreground: #1E293B;
+  --card: #FFFFFF;
+  --card-foreground: #1E293B;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E293B;
+  --primary: #D9381E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F1EA;
+  --secondary-foreground: #1E293B;
+  --muted: #F4F1EA;
+  --muted-foreground: #64748B;
+  --accent: #0F9D77;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #D9381E;
+  --saffron: #D9381E;
+  --india-green: #0F9D77;
+  --chakra: #1E293B;
   /* Map theme tokens */
-  --map-fill-active: oklch(0.65 0.16 60);
-  --map-fill-inactive-base: 0.82;
-  --map-stroke-active: oklch(0.75 0.14 60);
-  --map-stroke-inactive: oklch(0.70 0.03 265);
-  --map-label-active: oklch(0.15 0.02 265);
-  --map-label-inactive: oklch(0.35 0.02 265);
-  --map-label-stroke-active: oklch(0.98 0.05 60);
-  --map-label-stroke-inactive: oklch(0.97 0.01 265);
+  --map-fill-active: #D9381E;
+  --map-fill-inactive-base: 0.88;
+  --map-stroke-active: #FF7D60;
+  --map-stroke-inactive: rgba(0, 0, 0, 0.08);
+  --map-label-active: #FFFFFF;
+  --map-label-inactive: #475569;
+  --map-label-stroke-active: #D9381E;
+  --map-label-stroke-inactive: #FFFFFF;
 }
 
 .dark {

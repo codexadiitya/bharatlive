@@ -238,9 +238,9 @@ function Home() {
               </a>
               <Link
                 to="/bot"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:bg-muted hover:border-saffron/30 hover:scale-[1.02] active:scale-95"
+                className="group inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:bg-saffron hover:text-primary-foreground hover:border-saffron hover:shadow-lg hover:shadow-saffron/20 hover:scale-[1.02] active:scale-95"
               >
-                <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                <MessageSquare className="h-4 w-4 text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300" />
                 Ask BharatBot
               </Link>
             </div>

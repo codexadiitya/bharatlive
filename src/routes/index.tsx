@@ -434,11 +434,15 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 py-12">
           <div className="grid gap-10 lg:grid-cols-2">
             <div className="flex flex-col items-start text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-saffron/30 bg-saffron/5 px-3 py-1 text-xs font-semibold text-saffron tracking-wide">
+              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">
                 ABOUT BHARATLIVE
               </span>
-              <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground">
-                India, one <span className="relative inline-block px-3.5 py-0.5 mx-1 italic text-saffron bg-saffron/10 border border-saffron/20 rounded-2xl">click</span> at a time.
+              <h2 className="mt-4 font-display text-4xl font-bold leading-tight">
+                <span className="text-slate-800 dark:text-white">India,</span>{" "}
+                <span className="text-[#E7581C]">one</span>{" "}
+                <span className="text-[#DC2626]">click</span>{" "}
+                <span className="text-[#7C3AED]">at a</span>{" "}
+                <span className="text-[#2563EB]">time.</span>
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground/80 max-w-md">
                 Built as an interactive India news explorer.
